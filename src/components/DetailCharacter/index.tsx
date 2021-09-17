@@ -3,9 +3,7 @@ import { useNavigation } from '@react-navigation/native';
 import { useDispatch, useSelector } from 'react-redux';
 import { Feather } from "@expo/vector-icons";
 
-import { Character as ICharacter } from '../../@types/character';
-
-import { selectCharacter} from '../../redux/reducers/character';
+import { Character, Character as ICharacter } from '../../@types/character';
 
 import theme from '../../global/styles/theme';
 
@@ -33,9 +31,12 @@ import {
   FavoriteButtonText,
 } from './styles';
 
-function DetailCharacter()  {
+interface Props {
+  character: Character
+}
+
+function DetailCharacter({ character } : Props)  {
  
-  const {  character} = useSelector(selectCharacter)
   const {  favorites } = useSelector(selectFavorite)
   const [firstSeen, setFirstSeen] = useState('')
 

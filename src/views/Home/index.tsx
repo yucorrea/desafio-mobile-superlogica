@@ -11,7 +11,6 @@ import DetailCharacter from '../../components/DetailCharacter';
 
 import {
   addCharacters,
-  selectedCharacter,
   selectCharacter
 } from '../../redux/reducers/character';
 
@@ -28,6 +27,7 @@ function Home() {
 
   const [currentPage, setCurrentPage] = useState(1)
   const [isLoading, setIsLoading] = useState(false);
+  const [character, setCharacter] = useState({} as ICharacter);
   const [modal, setModal] = useState(false);
 
   const { characters, filtering } = useSelector(selectCharacter)
@@ -49,7 +49,7 @@ function Home() {
   }
 
   const handleEvent = (item: any) => {
-    dispatch(selectedCharacter(item))
+    setCharacter(item)
     setModal(true)
   }
 
@@ -94,7 +94,7 @@ function Home() {
       />
 
       <Modal show={modal} close={() => setModal(false)}>
-        <DetailCharacter />
+        <DetailCharacter character={character}/>
       </Modal>
 
     </Container >

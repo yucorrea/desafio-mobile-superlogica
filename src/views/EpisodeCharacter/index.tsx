@@ -8,7 +8,6 @@ import { Modal } from '../../components/Modal';
 
 import { Container } from './styles';
 
-import { selectedCharacter } from '../../redux/reducers/character';
 import { useDispatch } from 'react-redux';
 import DetailCharacter from '../../components/DetailCharacter';
 
@@ -26,10 +25,8 @@ interface Props {
 function EpisodeCharacter({ route }: Props) {
 
   const [characters, setCharacters] = useState<ICharacter[]>([]);
+  const [character, setCharacter] = useState({} as ICharacter);
   const [modal, setModal] = useState(false);
-
-  const dispatch = useDispatch()
-
 
   function fetchCharacters(url: string) {
     return fetch(url).then(res => res.json())
@@ -43,7 +40,7 @@ function EpisodeCharacter({ route }: Props) {
 
 
   const handleEvent = (item: any) => {
-    dispatch(selectedCharacter(item))
+    setCharacter(item)
     setModal(true)
   }
 
@@ -62,7 +59,7 @@ function EpisodeCharacter({ route }: Props) {
       />
 
       <Modal show={modal} close={() => setModal(false)}>
-        <DetailCharacter />
+        <DetailCharacter character={character}/>
       </Modal>
     </Container>
   )
