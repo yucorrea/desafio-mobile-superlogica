@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useState, useEffect } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { useDispatch, useSelector } from 'react-redux';
 import { Feather } from "@expo/vector-icons";
@@ -37,7 +37,12 @@ function DetailCharacter()  {
  
   const {  character} = useSelector(selectCharacter)
   const {  favorites } = useSelector(selectFavorite)
-  
+  const [firstSeen, setFirstSeen] = useState('')
+
+  useEffect(() => {
+    fetchEpisodes(character.episode[0])
+  },[character])
+
   const dispatch = useDispatch()
 
   const handleRemoveCharacter = (character: ICharacter) => {
@@ -61,6 +66,9 @@ function DetailCharacter()  {
     navigation.navigate('Episodes', { episode: character.episode })
   }, [character])
 
+  function fetchEpisodes(url: string) {
+    fetch(url).then(res => res.json()).then(res => setFirstSeen(res.name))
+  }
 
   const navigation = useNavigation()
 
@@ -80,7 +88,7 @@ function DetailCharacter()  {
           <Episode>{character.location.name}</Episode>
 
           <FirstTitle>First seen in:</FirstTitle>
-          <Episode>{character.episode[0]}</Episode>
+          <Episode>{firstSeen ?? '-'}</Episode>
 
           <ActionsContainer>
             <EpisodeButton onPress={handleNavigateToEpisodes}>
