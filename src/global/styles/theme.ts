@@ -4,7 +4,9 @@ export default {
         secondary: "#3C3E44",
 
         background: "#24282F",
+        background_dark: "#23252A",
         title: "#FFF",
+        title_light: "rgba(255,255,255,0.3)",
         text: "#9E9E9E",
         title_dark: "#24282F", 
 

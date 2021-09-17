@@ -57,7 +57,11 @@ const MainRoute = () => {
         return <Icon name={name} size={size} color={color} />
       },
       tabBarActiveTintColor: theme.colors.primary,
-      tabBarInactiveTintColor: theme.colors.text,
+      tabBarInactiveTintColor: theme.colors.title_light,
+      tabBarStyle: {
+        backgroundColor: theme.colors.background_dark,
+        borderTopColor:  theme.colors.background_dark,
+      },
       headerShown: false
     })}
 
@@ -65,19 +69,19 @@ const MainRoute = () => {
       <BottomTab.Screen
         name="Home"
         component={HomeStack}
-        options={{ title: "Personagens", headerShown: false }}
+        options={{ title: "Home", headerShown: false }}
       />
 
       <BottomTab.Screen 
         name="Episodes"
         component={Episodes}
-        options={{ title: "Episódios" }}
+        options={{ title: "Episodes" }}
       />
 
       <BottomTab.Screen
         name="Locations"
         component={Locations}
-        options={{ title: "Localizações" }}
+        options={{ title: "Locations" }}
       />
     </BottomTab.Navigator>
   );
