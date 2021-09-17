@@ -44,3 +44,5 @@ const Persistor = persistStore(Store)
 sagaMiddleware.run(rootSagas);
 
 export { Store, Persistor };
+
+export type RootState = ReturnType<typeof Store.getState>

@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { Character } from "../../@types/character";
+import { RootState } from "../store";
 
 const initialState = {
     favorites: [] as Character[],
@@ -24,7 +25,7 @@ export const {
 }  = favoriteSlice.actions
 
 
-export const selectFavorite = state => state.favorite
+export const selectFavorite = (state : RootState) => state.favorite
 
 export default favoriteSlice.reducer;
 

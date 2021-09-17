@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { Character } from "../../@types/character";
+import { RootState } from "../store";
 
 const initialState = {
     characters: [] as Character[],
@@ -30,7 +31,7 @@ export const {
 }  = characterSlice.actions
 
 
-export const selectCharacter = state => state.character
+export const selectCharacter = (state : RootState ) => state.character
 
 export default characterSlice.reducer;
 
