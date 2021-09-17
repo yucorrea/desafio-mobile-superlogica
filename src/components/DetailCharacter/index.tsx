@@ -64,7 +64,7 @@ function DetailCharacter({ character } : Props)  {
 
   const handleNavigateToEpisodes = useCallback(() => {
     //@ts-ignore
-    navigation.navigate('Episodes', { episode: character.episode })
+    navigation.navigate('Episode', { episode: character.episode })
   }, [character])
 
   function fetchEpisodes(url: string) {
