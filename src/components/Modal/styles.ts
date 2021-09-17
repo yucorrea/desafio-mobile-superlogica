@@ -11,17 +11,15 @@ export const ModalContainer = styled(Animated.View)`
     right: 0;
     background: rgba(0, 0, 0, 0.5);
     z-index: 2;
+    justify-content: center;
+    align-items: center;
 `;
 
 export const ModalContent = styled(Animated.View)`
     width: 100%;
-    border-top-left-radius: 50px;
-    border-top-right-radius: 50px;
+    border-radius: 20px;
 
     background: ${({ theme}) => theme.colors.title};
-
-    position: absolute;
-    bottom: 0;
     padding: 16px;
 
 `;
