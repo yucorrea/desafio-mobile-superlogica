@@ -6,7 +6,7 @@ export const Container = styled.View`
   background: ${({ theme }) => theme.colors.background};
 `;
 
-export const Chapter = styled.TouchableOpacity`
+export const Chapter = styled.View`
   flex-direction: row;
   align-items: center;
   height: 70px;
@@ -27,6 +27,7 @@ export const Date = styled.Text`
   font-family: ${({ theme }) => theme.fonts.bold};
   font-size: 14px;
   color: ${({ theme }) => theme.colors.text};
+  
 `;
 
 export const Line = styled.View`

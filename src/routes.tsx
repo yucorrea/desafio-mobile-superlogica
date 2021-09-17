@@ -4,11 +4,13 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import Home from './views/Home'
 import Episode from './views/Episode'
+import Episodes from './views/Episodes'
+import Locations from './views/Locations'
+
 import EpisodeCharacter from './views/EpisodeCharacter'
 
 import { Feather } from "@expo/vector-icons";
 import theme from './global/styles/theme';
-import { View } from 'react-native';
 
 const Stack = createNativeStackNavigator();
 const BottomTab = createBottomTabNavigator();
@@ -33,7 +35,7 @@ const HomeStack = () => {
   return (
     <Stack.Navigator>
       <Stack.Screen name="Home" component={Home} options={{ headerShown: false }} />
-      <Stack.Screen name="Episodes" component={Episode} options={{ headerShown: true }} />
+      <Stack.Screen name="Episode" component={Episode} options={{ headerShown: true }} />
       <Stack.Screen
         name="EpisodeCharacter" component={EpisodeCharacter}
         options={({ route }: any) => ({
@@ -56,6 +58,7 @@ const MainRoute = () => {
       },
       tabBarActiveTintColor: theme.colors.primary,
       tabBarInactiveTintColor: theme.colors.text,
+      headerShown: false
     })}
 
     >
@@ -65,14 +68,15 @@ const MainRoute = () => {
         options={{ title: "Personagens", headerShown: false }}
       />
 
-      <BottomTab.Screen name="Episodes"
-        component={View}
+      <BottomTab.Screen 
+        name="Episodes"
+        component={Episodes}
         options={{ title: "Episódios" }}
       />
 
       <BottomTab.Screen
         name="Locations"
-        component={View}
+        component={Locations}
         options={{ title: "Localizações" }}
       />
     </BottomTab.Navigator>

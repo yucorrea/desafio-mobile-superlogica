@@ -6,7 +6,7 @@ export const Container = styled.View`
   background: ${({ theme }) => theme.colors.background};
 `;
 
-export const Chapter = styled.TouchableOpacity`
+export const Location = styled.View`
   flex-direction: row;
   align-items: center;
   height: 70px;
@@ -14,7 +14,7 @@ export const Chapter = styled.TouchableOpacity`
 
 export const Wrapper = styled.View`
   flex-direction: column;
-  margin-left: 16px;
+  margin-left: 24px;
 `;
 
 export const Title = styled.Text`
@@ -23,11 +23,12 @@ export const Title = styled.Text`
   color: ${({ theme }) => theme.colors.title};
 `;
 
-export const Date = styled.Text`
+export const Dimension = styled.Text`
   font-family: ${({ theme }) => theme.fonts.bold};
   font-size: 14px;
   color: ${({ theme }) => theme.colors.text};
 `;
+
 
 export const Line = styled.View`
   width: 100%;
