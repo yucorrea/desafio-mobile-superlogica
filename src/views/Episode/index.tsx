@@ -1,3 +1,4 @@
+import { useNavigation } from '@react-navigation/core';
 import React, { useState, useEffect } from 'react';
 import { ActivityIndicator, FlatList } from 'react-native';
 import theme from '../../global/styles/theme';
@@ -35,6 +36,14 @@ function Episode({ route } : Props)  {
 
   }, [route.params])
 
+
+  const navigation = useNavigation()
+
+  const handleNavigateToEpisodeCharacter = (episode: string, characters: Array<string>, ) => {
+    //@ts-ignore
+    navigation.navigate('EpisodeCharacter', { characters: characters, episode })
+  }
+
   return (
     <Container>
 
@@ -45,7 +54,7 @@ function Episode({ route } : Props)  {
         showsVerticalScrollIndicator={false}
         ListEmptyComponent={ () => <ActivityIndicator size="large" color={theme.colors.primary} />}
         renderItem={({item}) => (
-          <Chapter>
+          <Chapter onPress={() => handleNavigateToEpisodeCharacter(item.episode, item.characters)}>
             <Title>{item.episode}</Title>
 
             <Wrapper>

@@ -6,7 +6,7 @@ export const Container = styled.View`
   background: ${({ theme }) => theme.colors.background};
 `;
 
-export const Chapter = styled.View`
+export const Chapter = styled.TouchableOpacity`
   flex-direction: row;
   align-items: center;
   height: 70px;
