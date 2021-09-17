@@ -4,23 +4,33 @@ import {
   compose,
   applyMiddleware,
 } from "@reduxjs/toolkit";
-import createSagaMiddleware from "redux-saga";
+
+import { persistStore, persistReducer} from "redux-persist";
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
+const persistConfig = {
+  key: 'root',
+  storage: AsyncStorage,
+  whitelist: ['favorites']
+};
+
 import { all } from "redux-saga/effects";
 
-import exampleSlice from "./reducers/example";
+import createSagaMiddleware from "redux-saga";
 
-import exampleSaga from "./sagas/example";
+import characterReducer from './reducers/character';
+import favoriteReducer from './reducers/favorite';
 
 /* Reducers */ 
 const reducers = combineReducers({
-  example: exampleSlice.reducer,
+  character: characterReducer,
+  favorite:  persistReducer(persistConfig, favoriteReducer),
 });
 
 /* Sagas */ 
 export const rootSagas = function* rootSagas(): any {
-  return yield all([exampleSaga()]);
+  return yield all([ ]);
 };
-
 
 /* Store and middlewares configuration */ 
 const sagaMiddleware = createSagaMiddleware({});
@@ -29,7 +39,8 @@ const middlewares: any = [];
 middlewares.push(sagaMiddleware);
 
 const Store = createStore(reducers, compose(applyMiddleware(...middlewares)));
+const Persistor = persistStore(Store)
 
 sagaMiddleware.run(rootSagas);
 
-export { Store };
+export { Store, Persistor };
