@@ -1,33 +1,34 @@
-# Desafio em React Native
+<h1 align="center">
+    <img alt="qrcode" src="./gihub/banner.png" />
+</h1>
 
-## O que esperamos que você faça?
-A ideia é bem simples, queremos um aplicativo que nos mostre todos os personagens da Série Rick and Morty além de suas localizações e episódios.
+<p align="center">
+  Aplicativo de listagem de todos os personagens da Série Rick and Morty além de suas localizações e episódios.
+</p>
 
-## Requisitos básicos:
-- Utilizar a API de personsagens: (https://rickandmortyapi.com/)
-- O aplicativo deve conter uma listagem paginada em infinite scroll;
-- Uma modal com os detalhes do personagem;
-- Deve ser possível favoritar um personagem; (os favoritos devem ser salvos em base local.)
-- Deverá disponibilizar dois filtros: nome do personagem, e meus favoritos;
+<p align="center">
+  <a href="#rocket-tecnologias">Tecnologias</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#art-layout">Layout</a>&nbsp;&nbsp;&nbsp;
+</p>
 
-## Requisitos técnicos:
-- TypeScript;
-- Redux;
-- Usar persistência de dados; (a livre escolha de base.)
+<hr >
+## :rocket: Tecnologias
 
-## Gostaríamos que:
-- Sua imaginação fluísse em relação a interface.
-- Caso tenha tempo, fique a vontade para adicionar o que achar necessário. (mas o tempo estará contando!!!)
+Este projeto foi desenvolvido com as seguintes tecnologias:
 
-## O que iremos avaliar:
-- **Iremos observar principalmente a forma com que você irá aplicar o JavaScript.**
-- Organização estrutural do projeto;
-- Utilização de padrões de desenvolvimento;
-- Bom código;
-- Tempo utilizado;
-- UI/UX; (não precisa ser a melhor, mas precisa ser funcional.)
+- [Expo](https://expo.dev/)
+- [React Native](https://facebook.github.io/react-native/)
+- [React Navigation](https://reactnavigation.org/)
+- [Redux](https://redux.js.org/)
+- [Redux Saga](https://redux-saga.js.org/)
+- [Redux Persist]('https://github.com/rt2zz/redux-persist')
+- [Redux Toolkit]('https://redux-toolkit.js.org/')
+- [Styled Components](https://www.styled-components.com/)
+- [Axios](https://github.com/axios/axios)
 
-## Como iremos avaliar?
-- Faça um fork desse repósitorio.
-- Publique o teste no expo.io e disponibilize o QRCode no README do projeto
-- Após isso, é conosco!
+## :art: Layout
+ Você pode ver o layout no [Figma](https://www.figma.com/file/S1x3r1ToSz36wYoby2palc/Desafio-Ricky-and-Morty?node-id=0%3A1)
+
+---
+
+Feito com ♥ by Yuri Corrêa :wave: [Entrar em contato!](https://www.linkedin.com/in/yucorrea/)
