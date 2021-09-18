@@ -1,14 +1,14 @@
 {
   "expo": {
-    "name": "base-desafio-superlogica",
-    "slug": "base-desafio-superlogica",
+    "name": "Rick and Morty",
+    "slug": "rick-and-morty",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#24282F"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
@@ -22,12 +22,13 @@
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#FFFFFF"
+        "backgroundColor": "#24282F"
       }
     },
     "web": {
       "favicon": "./assets/favicon.png"
     },
-    "description": ""
+    "description": "Aplicativo que nos mostre todos os personagens da Série Rick and Morty além de suas localizações e episódios.",
+    "githubUrl": "https://github.com/yucorrea/desafio-mobile-superlogica"
   }
 }
