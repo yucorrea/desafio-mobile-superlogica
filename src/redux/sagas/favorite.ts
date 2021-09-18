@@ -1,22 +1,10 @@
-import { all, takeLatest,  put, call, select } from "redux-saga/effects"
-import api from "../../services/api";
+import { all, takeLatest, put } from "redux-saga/effects"
 
-import {  addCharacters } from "../reducers/character";
-import {  removeFavoriteCharacter } from "../reducers/favorite";
+import { setFilterCharacters } from "../reducers/character";
+import { removeFavoriteCharacter } from "../reducers/favorite";
 
 function* favoriteCharacterRequest() {
-    const { favorites } = yield select(state => state.favorite)
-
-    if (favorites && favorites.length > 0 ) {
-        //@ts-ignore
-        const response = yield call(api.get, `character/${favorites.toString()}`)
-
-        const characters = response.data.length > 1 ? response.data : [response.data]
-        yield put(addCharacters(characters))
-    }else {
-        yield put(addCharacters([]))
-    }
-
+    yield put(setFilterCharacters({}))
 }
 
 function* watchRequestCharacterRemove() {
@@ -24,7 +12,7 @@ function* watchRequestCharacterRemove() {
 }
 
 function* root() {
-    yield all([ watchRequestCharacterRemove() ])
+    yield all([watchRequestCharacterRemove()])
 }
 
 export default root
