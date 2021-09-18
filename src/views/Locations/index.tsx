@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { ActivityIndicator, FlatList } from 'react-native';
+import { Location as ILocation } from '../../@types/location';
 import theme from '../../global/styles/theme';
 import api from '../../services/api';
 
@@ -14,7 +15,7 @@ import {
 
 function Locations()  {
 
-  const [locations, setLocations] = useState<any>([]);
+  const [locations, setLocations] = useState<ILocation[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1)
 

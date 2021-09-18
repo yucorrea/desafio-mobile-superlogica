@@ -1,20 +1,23 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { ActivityIndicator, FlatList } from 'react-native';
+import { Episode } from '../../@types/episode';
 import theme from '../../global/styles/theme';
 import api from '../../services/api';
 
-import { 
-  Container, 
-  Chapter, 
+import {
+  Container,
+  Chapter,
   Wrapper,
-  Title, 
+  Title,
   Date,
   Line,
- } from './styles';
+} from './styles';
 
-function Episodes()  {
 
-  const [episodes, setEpisodes] = useState<any>([]);
+
+function Episodes() {
+
+  const [episodes, setEpisodes] = useState<Episode[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1)
 
@@ -27,7 +30,7 @@ function Episodes()  {
     setIsLoading(true)
     api.get(`/episode?&page=${currentPage}`).then(res => {
 
-      setEpisodes([...episodes, ...res.data.results ])
+      setEpisodes([...episodes, ...res.data.results])
 
       setIsLoading(false)
     }).catch((err) => {
@@ -36,10 +39,10 @@ function Episodes()  {
   }
 
   const handlePaginate = useCallback(() => {
-    if (!isLoading ) {
+    if (!isLoading) {
       setCurrentPage(currentPage + 1)
     }
-  },[isLoading, currentPage])
+  }, [isLoading, currentPage])
 
 
   const listFooter = () => {
@@ -49,19 +52,19 @@ function Episodes()  {
   return (
     <Container>
 
-      <FlatList 
+      <FlatList
         data={episodes}
         ItemSeparatorComponent={() => <Line />}
         keyExtractor={item => item.id.toString()}
         showsVerticalScrollIndicator={false}
         onEndReached={handlePaginate}
         ListFooterComponent={listFooter}
-        renderItem={({item}) => (
+        renderItem={({ item }) => (
           <Chapter>
             <Title>{item.episode}</Title>
 
             <Wrapper>
-              <Title style={{fontSize: 14}} numberOfLines={1}>{item.name}</Title>
+              <Title style={{ fontSize: 14 }} numberOfLines={1}>{item.name}</Title>
               <Date>{item.air_date}</Date>
             </Wrapper>
           </Chapter>

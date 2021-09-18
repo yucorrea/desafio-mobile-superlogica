@@ -99,9 +99,9 @@ export function DetailCharacter()  {
             onPress={() =>
               ifExists(character.id) ? handleRemoveCharacter(character.id) : handleAddCharacter(character.id)
             }>
-            <Feather size={24} color={theme.colors.title} name={ifExists(character) ? "trash" : "heart"} />
+            <Feather size={24} color={theme.colors.title} name={ifExists(character.id) ? "trash" : "heart"} />
             <FavoriteButtonText>
-              {ifExists(character) ? "Remove" : "Favorite"}
+              {ifExists(character.id) ? "Remove" : "Favorite"}
             </FavoriteButtonText>
           </FavoriteButton>
         </Content>

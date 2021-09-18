@@ -30,7 +30,7 @@ const characterSlice = createSlice({
             state.filter = { ...state.filter, ...payload } 
             state.currentPage = 1
         },
-        setLoading(state, { payload }) {
+        setLoading(state, { payload } : PayloadAction<boolean>) {
             state.isLoading = payload
         }
     }

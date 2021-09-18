@@ -10,7 +10,6 @@ import { Modal } from '../../components/Modal';
 import { DetailCharacter } from '../../components/DetailCharacter';
 
 import {
-  setFilterCharacters,
   setLoading,
   selectCharacter,
   getAllCharacters

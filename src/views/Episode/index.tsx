@@ -1,6 +1,7 @@
 import { useNavigation } from '@react-navigation/core';
 import React, { useState, useEffect, useCallback } from 'react';
 import { ActivityIndicator, FlatList } from 'react-native';
+import { Episode as IEpisode } from '../../@types/episode';
 import theme from '../../global/styles/theme';
 
 import {
@@ -24,7 +25,7 @@ interface Props {
 
 function Episode({ route }: Props) {
 
-  const [episodes, setEpisodes] = useState<any>([]);
+  const [episodes, setEpisodes] = useState<IEpisode[]>([]);
   const navigation = useNavigation()
 
   useEffect(() => {
