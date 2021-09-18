@@ -11,7 +11,6 @@
   <a href="#art-layout">Layout</a>&nbsp;&nbsp;&nbsp;
 </p>
 
-<hr >
 ## :rocket: Tecnologias
 
 Este projeto foi desenvolvido com as seguintes tecnologias:
