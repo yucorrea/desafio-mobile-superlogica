@@ -30,11 +30,11 @@ const icons = {
     name: "map-pin"
   }
 }
-
+ 
 const HomeStack = () => {
   return (
     <Stack.Navigator>
-      <Stack.Screen name="Home" component={Home} options={{ headerShown: false }} />
+      <Stack.Screen name="HomeStack" component={Home} options={{ headerShown: false }} />
       <Stack.Screen name="Episode" component={Episode} options={{ headerShown: true }} />
       <Stack.Screen
         name="EpisodeCharacter" component={EpisodeCharacter}

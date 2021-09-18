@@ -1,5 +1,5 @@
 import { useNavigation } from '@react-navigation/core';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { ActivityIndicator, FlatList } from 'react-native';
 import theme from '../../global/styles/theme';
 
@@ -25,10 +25,7 @@ import {
 function Episode({ route } : Props)  {
 
   const [episodes, setEpisodes] = useState<any>([]);
-
-  function fetchEpisodes(url: string) {
-    return fetch(url).then(res => res.json())
-  }
+  const navigation = useNavigation()
 
   useEffect(() => {
     let promises = route.params.episode.map((url : string) => fetchEpisodes(url))
@@ -36,13 +33,14 @@ function Episode({ route } : Props)  {
 
   }, [route.params])
 
-
-  const navigation = useNavigation()
-
-  const handleNavigateToEpisodeCharacter = (episode: string, characters: Array<string>, ) => {
-    //@ts-ignore
-    navigation.navigate('EpisodeCharacter', { characters: characters, episode })
+  function fetchEpisodes(url: string) {
+    return fetch(url).then(res => res.json())
   }
+
+  const handleNavigateToEpisodeCharacter = useCallback((episode: string, characters: Array<string>, ) => {
+    //@ts-ignore
+    navigation.navigate('EpisodeCharacter', { characters: characters, episode: episode })
+  },[])
 
   return (
     <Container>

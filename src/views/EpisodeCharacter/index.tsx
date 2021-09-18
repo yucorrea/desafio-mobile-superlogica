@@ -1,15 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { ActivityIndicator, FlatList } from 'react-native';
 import { Character as ICharacter } from '../../@types/character';
 import theme from '../../global/styles/theme';
 
 import { Character } from '../../components/Character';
 import { Modal } from '../../components/Modal';
+import { DetailCharacter } from '../../components/DetailCharacter';
 
 import { Container } from './styles';
-
-import { useDispatch } from 'react-redux';
-import DetailCharacter from '../../components/DetailCharacter';
 
 export interface RouteProps {
   params: {
@@ -39,10 +37,14 @@ function EpisodeCharacter({ route }: Props) {
   }, [route.params])
 
 
-  const handleEvent = (item: any) => {
+  const handleEvent = useCallback((item: any) => {
     setCharacter(item)
     setModal(true)
-  }
+  },[])
+
+  const handleCloseModal = useCallback(() => {
+    setModal(false)
+  },[])
 
   return (
     <Container>
@@ -58,7 +60,7 @@ function EpisodeCharacter({ route }: Props) {
         )}
       />
 
-      <Modal show={modal} close={() => setModal(false)}>
+      <Modal show={modal} close={handleCloseModal}>
         <DetailCharacter character={character}/>
       </Modal>
     </Container>

@@ -1,9 +1,11 @@
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
+import { StatusBar } from 'expo-status-bar';
 import { NavigationContainer } from '@react-navigation/native';
 import {Provider} from 'react-redux';
 import { ThemeProvider } from 'styled-components/native';
 import AppLoading from 'expo-app-loading';
+import { Persistor, Store } from './src/redux/store';
+import { PersistGate } from 'redux-persist/integration/react';
 
 import { 
   useFonts, 
@@ -12,11 +14,9 @@ import {
   Inter_600SemiBold 
 } from '@expo-google-fonts/inter';
 
-import MainRoute from './src/routes';
-import { Persistor, Store } from './src/redux/store';
-import { PersistGate } from 'redux-persist/integration/react';
-
 import theme from './src/global/styles/theme';
+
+import MainRoute from './src/routes';
 
 export default function App() {
 

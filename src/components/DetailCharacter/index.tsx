@@ -35,16 +35,15 @@ interface Props {
   character: Character
 }
 
-function DetailCharacter({ character } : Props)  {
+export function DetailCharacter({ character } : Props)  {
  
   const {  favorites } = useSelector(selectFavorite)
   const [firstSeen, setFirstSeen] = useState('')
+  const dispatch = useDispatch()
 
   useEffect(() => {
     fetchEpisodes(character.episode[0])
   },[character])
-
-  const dispatch = useDispatch()
 
   const handleRemoveCharacter = (character: ICharacter) => {
     dispatch(removeFavoriteCharacter(character))
@@ -112,5 +111,3 @@ function DetailCharacter({ character } : Props)  {
       </>
   )
 }
-
-export default DetailCharacter;

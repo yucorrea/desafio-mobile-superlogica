@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { ActivityIndicator, FlatList } from 'react-native';
 import theme from '../../global/styles/theme';
 import api from '../../services/api';
@@ -35,11 +35,11 @@ function Locations()  {
   }, [currentPage])
 
 
-  const handlePaginate = () => {
+  const handlePaginate = useCallback(() => {
     if (!isLoading ) {
       setCurrentPage(currentPage + 1)
     }
-  }
+  },[])
 
   return (
     <Container>

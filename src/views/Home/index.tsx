@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { ActivityIndicator, FlatList, Alert } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -7,7 +7,7 @@ import { Character as ICharacter } from '../../@types/character';
 import { Character } from '../../components/Character';
 import { Filter } from '../../components/Filter';
 import { Modal } from '../../components/Modal';
-import DetailCharacter from '../../components/DetailCharacter';
+import { DetailCharacter } from '../../components/DetailCharacter';
 
 import {
   addCharacters,
@@ -48,16 +48,16 @@ function Home() {
     });
   }
 
-  const handleEvent = (item: any) => {
+  const handleEvent = useCallback((item: ICharacter) => {
     setCharacter(item)
     setModal(true)
-  }
+  }, [])
 
-  const handlePaginate = () => {
+  const handlePaginate = useCallback(() => {
     if (!isLoading && !filtering) {
       setCurrentPage(currentPage + 1)
     }
-  }
+  }, [currentPage, isLoading, filtering])
 
   return (
     <Container>
@@ -74,8 +74,8 @@ function Home() {
         ListEmptyComponent={
           () => (
             <>
-              { ( !isLoading && characters.length <= 0) 
-                ? (<Title style={{fontSize: 16}}>No results found</Title>)
+              {(!isLoading && characters.length <= 0)
+                ? (<Title style={{ fontSize: 16 }}>No results found</Title>)
                 : null
               }
             </>
@@ -94,7 +94,7 @@ function Home() {
       />
 
       <Modal show={modal} close={() => setModal(false)}>
-        <DetailCharacter character={character}/>
+        <DetailCharacter character={character} />
       </Modal>
 
     </Container >
