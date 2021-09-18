@@ -17,13 +17,13 @@
 Este projeto foi desenvolvido com as seguintes tecnologias:
 
 - [Expo](https://expo.dev/)
-- [React-native](https://facebook.github.io/react-native/)
-- [React-navigation](https://reactnavigation.org/)
+- [React Native](https://facebook.github.io/react-native/)
+- [React Navigation](https://reactnavigation.org/)
 - [Redux](https://redux.js.org/)
 - [Redux Saga](https://redux-saga.js.org/)
-- [Redux-Persist](https://github.com/rt2zz/redux-persist)
+- [Redux Persist](https://github.com/rt2zz/redux-persist)
 - [Redux Toolkit](https://redux-toolkit.js.org/)
-- [Styled-components](https://www.styled-components.com/)
+- [Styled Components](https://www.styled-components.com/)
 - [Axios](https://github.com/axios/axios)
 
 ## :art: Layout
