@@ -4,29 +4,47 @@ import { RootState } from "../store";
 
 const initialState = {
     characters: [] as Character[],
-    filtering: false
+    filter: {
+        search: '',
+        option: 1,
+    },
+    isLoading: false,
+    currentPage: 1,
+    totalPage: 0
 }
 
 const characterSlice = createSlice({
     name: "character",
     initialState,
-    reducers: { 
-        addCharacters(state, { payload } : PayloadAction<Character[]>) {
-            state.characters = payload
+    reducers: {
+        getAllCharacters() { },
+        addCharacters(state, { payload } ) {
+            state.characters = state.currentPage === 1 ? 
+            payload.characters : [...state.characters, ...payload.characters
+            ]
+            state.totalPage = payload.totalPage
+            state.isLoading = false
+            state.currentPage = state.currentPage + 1
         },
-        setFiltering(state, { payload } : PayloadAction<boolean>) {
-            state.filtering  = payload
+        setFilterCharacters(state, { payload }) {
+            state.filter = { ...state.filter, ...payload } 
+            state.currentPage = 1
         },
+        setLoading(state, { payload }) {
+            state.isLoading = payload
+        }
     }
 })
 
 export const {
+    getAllCharacters,
     addCharacters,
-    setFiltering
-}  = characterSlice.actions
+    setFilterCharacters,
+    setLoading
+} = characterSlice.actions
 
 
-export const selectCharacter = (state : RootState ) => state.character
+export const selectCharacter = (state: RootState) => state.character
 
 export default characterSlice.reducer;
 

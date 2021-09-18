@@ -1,20 +1,12 @@
 
 import React, { useState, useCallback } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { Feather } from "@expo/vector-icons";
 import { TouchableNativeFeedback} from 'react-native';
 
-import { Character } from '../../@types/character';
-
-import api from '../../services/api';
 import theme from '../../global/styles/theme';
 
-import {
-    addCharacters,
-    setFiltering
-} from "../../redux/reducers/character";
-
-import { selectFavorite } from "../../redux/reducers/favorite";
+import { setFilterCharacters } from '../../redux/reducers/character';
 
 import { Modal } from '../Modal';
 
@@ -43,45 +35,14 @@ export function Filter() {
 
     const dispatch = useDispatch();
 
-    const { favorites } = useSelector(selectFavorite)
-
-    const fetchCharacters = (search = '') => {
-        api.get(`/character?name=${search}`).then(res => {
-
-            dispatch(addCharacters(res.data.results))
-
-        }).catch((err) => {
-            dispatch(addCharacters([]))
-        });
-
-    }
-
     const handleInputSearch = useCallback(() => {
-        dispatch(setFiltering(true))
-
-        if (search === '' && selected === 1) {
-            dispatch(setFiltering(false))
-        }
-
-        if (selected === 1) {
-            fetchCharacters(search)
-        } else {
-            const filteredFavorites = favorites.filter((character : Character) => character.name.includes(search))
-            dispatch(addCharacters(filteredFavorites))
-        }
-
-    }, [search, selected, favorites])
+        dispatch(setFilterCharacters({  search: search, option: selected }))
+    }, [search, selected])
 
     const handleApplyFilters = useCallback(() => {
-        dispatch(setFiltering(true))
-        if (selected === 1) {
-            fetchCharacters()
-        } else {
-            dispatch(addCharacters(favorites))
-        }
+        dispatch(setFilterCharacters({  search: search, option: selected }))
         setModal(false)
-
-    }, [selected])
+    }, [selected, search])
 
     return (
         <>

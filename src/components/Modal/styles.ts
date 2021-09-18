@@ -1,7 +1,7 @@
 import { Animated, Dimensions } from "react-native";
 import styled from "styled-components/native";
 
-const  { width ,height } = Dimensions.get('window');
+const { width, height } = Dimensions.get('window');
 
 export const ModalContainer = styled(Animated.View)`
 
@@ -11,16 +11,17 @@ export const ModalContainer = styled(Animated.View)`
     right: 0;
     background: rgba(0, 0, 0, 0.5);
     z-index: 2;
-    justify-content: center;
-    align-items: center;
+   
 `;
 
 export const ModalContent = styled(Animated.View)`
     width: 100%;
     border-radius: 20px;
 
-    background: ${({ theme}) => theme.colors.title};
+    background: ${({ theme }) => theme.colors.title};
     padding: 16px;
+    position: absolute;
+    top: 64px;
 
 `;
 
@@ -30,7 +31,7 @@ export const Close = styled.TouchableOpacity`
    align-self: flex-end;
 `
 
-export const Header  = styled.View`
+export const Header = styled.View`
     width: 100%;
     justify-content: flex-end;
     align-items: center;

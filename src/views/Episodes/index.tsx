@@ -18,6 +18,11 @@ function Episodes()  {
   const [isLoading, setIsLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1)
 
+  useEffect(() => {
+    fetchEpisodes()
+  }, [currentPage])
+
+
   function fetchEpisodes() {
     setIsLoading(true)
     api.get(`/episode?&page=${currentPage}`).then(res => {
@@ -30,16 +35,16 @@ function Episodes()  {
     });
   }
 
-  useEffect(() => {
-    fetchEpisodes()
-  }, [currentPage])
-
-
   const handlePaginate = useCallback(() => {
     if (!isLoading ) {
       setCurrentPage(currentPage + 1)
     }
   },[isLoading, currentPage])
+
+
+  const listFooter = () => {
+    return isLoading ? <ActivityIndicator size="large" color={theme.colors.primary} /> : null
+  }
 
   return (
     <Container>
@@ -50,13 +55,7 @@ function Episodes()  {
         keyExtractor={item => item.id.toString()}
         showsVerticalScrollIndicator={false}
         onEndReached={handlePaginate}
-        ListFooterComponent={
-          () => (
-            <>
-              {isLoading ? (<ActivityIndicator size="large" color={theme.colors.primary} />) : null}
-            </>
-          )
-        }
+        ListFooterComponent={listFooter}
         renderItem={({item}) => (
           <Chapter>
             <Title>{item.episode}</Title>

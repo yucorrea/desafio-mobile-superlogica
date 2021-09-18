@@ -3,8 +3,6 @@ import { useNavigation } from '@react-navigation/native';
 import { useDispatch, useSelector } from 'react-redux';
 import { Feather } from "@expo/vector-icons";
 
-import { Character, Character as ICharacter } from '../../@types/character';
-
 import theme from '../../global/styles/theme';
 
 import {
@@ -31,13 +29,12 @@ import {
   FavoriteButtonText,
 } from './styles';
 
-interface Props {
-  character: Character
-}
 
-export function DetailCharacter({ character } : Props)  {
+export function DetailCharacter()  {
  
   const {  favorites } = useSelector(selectFavorite)
+  const character = useSelector(state => state.selectedCharacter.character)
+
   const [firstSeen, setFirstSeen] = useState('')
   const dispatch = useDispatch()
 
@@ -45,16 +42,16 @@ export function DetailCharacter({ character } : Props)  {
     fetchEpisodes(character.episode[0])
   },[character])
 
-  const handleRemoveCharacter = (character: ICharacter) => {
-    dispatch(removeFavoriteCharacter(character))
+  const handleRemoveCharacter = (id: number) => {
+    dispatch(removeFavoriteCharacter(id))
   }
 
-  const handleAddCharacter = (character: ICharacter) => {
-    dispatch(addFavoriteCharacter(character))
+  const handleAddCharacter = (id : number) => {
+    dispatch(addFavoriteCharacter(id))
   }
 
-  const ifExists = (character: ICharacter) => {
-    if (favorites.filter((item: ICharacter) => item.id === character.id).length > 0) {
+  const ifExists = (id: number) => {
+    if (favorites.filter((item: number) => item === id).length > 0) {
       return true;
     }
 
@@ -98,9 +95,9 @@ export function DetailCharacter({ character } : Props)  {
 
           </ActionsContainer>
           <FavoriteButton
-            color={ifExists(character) ? theme.colors.danger : theme.colors.primary}
+            color={ifExists(character.id) ? theme.colors.danger : theme.colors.primary}
             onPress={() =>
-              ifExists(character) ? handleRemoveCharacter(character) : handleAddCharacter(character)
+              ifExists(character.id) ? handleRemoveCharacter(character.id) : handleAddCharacter(character.id)
             }>
             <Feather size={24} color={theme.colors.title} name={ifExists(character) ? "trash" : "heart"} />
             <FavoriteButtonText>

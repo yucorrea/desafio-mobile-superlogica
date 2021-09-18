@@ -1,7 +1,12 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { ActivityIndicator, FlatList } from 'react-native';
+import { useDispatch } from 'react-redux';
+
 import { Character as ICharacter } from '../../@types/character';
+
 import theme from '../../global/styles/theme';
+
+import { setCharacter } from "../../redux/reducers/selectedCharacter"
 
 import { Character } from '../../components/Character';
 import { Modal } from '../../components/Modal';
@@ -23,8 +28,9 @@ interface Props {
 function EpisodeCharacter({ route }: Props) {
 
   const [characters, setCharacters] = useState<ICharacter[]>([]);
-  const [character, setCharacter] = useState({} as ICharacter);
   const [modal, setModal] = useState(false);
+
+  const dispatch = useDispatch();
 
   function fetchCharacters(url: string) {
     return fetch(url).then(res => res.json())
@@ -38,13 +44,18 @@ function EpisodeCharacter({ route }: Props) {
 
 
   const handleEvent = useCallback((item: any) => {
-    setCharacter(item)
+    dispatch(setCharacter(item))
     setModal(true)
   },[])
 
   const handleCloseModal = useCallback(() => {
     setModal(false)
   },[])
+
+
+  const listEmpty = () => {
+    return <ActivityIndicator size="large" color={theme.colors.primary} />
+  }
 
   return (
     <Container>
@@ -54,14 +65,14 @@ function EpisodeCharacter({ route }: Props) {
         keyExtractor={item => item.id.toString()}
         numColumns={2}
         showsVerticalScrollIndicator={false}
-        ListEmptyComponent={() => <ActivityIndicator size="large" color={theme.colors.primary} />}
+        ListEmptyComponent={listEmpty}
         renderItem={({ item }) => (
           <Character onPress={() => handleEvent(item)} data={item} />
         )}
       />
 
       <Modal show={modal} close={handleCloseModal}>
-        <DetailCharacter character={character}/>
+        <DetailCharacter />
       </Modal>
     </Container>
   )

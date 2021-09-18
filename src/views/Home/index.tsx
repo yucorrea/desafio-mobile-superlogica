@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { ActivityIndicator, FlatList, Alert } from 'react-native';
+import { ActivityIndicator, FlatList } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { Character as ICharacter } from '../../@types/character';
@@ -10,11 +10,13 @@ import { Modal } from '../../components/Modal';
 import { DetailCharacter } from '../../components/DetailCharacter';
 
 import {
-  addCharacters,
-  selectCharacter
+  setFilterCharacters,
+  setLoading,
+  selectCharacter,
+  getAllCharacters
 } from '../../redux/reducers/character';
+import { setCharacter } from '../../redux/reducers/selectedCharacter';
 
-import api from '../../services/api';
 import theme from '../../global/styles/theme';
 
 import {
@@ -25,39 +27,33 @@ import {
 function Home() {
   const dispatch = useDispatch();
 
-  const [currentPage, setCurrentPage] = useState(1)
-  const [isLoading, setIsLoading] = useState(false);
-  const [character, setCharacter] = useState({} as ICharacter);
   const [modal, setModal] = useState(false);
 
-  const { characters, filtering } = useSelector(selectCharacter)
+  const { characters, isLoading, totalPage, currentPage } = useSelector(selectCharacter)
 
   useEffect(() => {
-    fetchCharacters()
-  }, [currentPage])
-
-  const fetchCharacters = () => {
-    setIsLoading(true)
-    api.get(`/character?&page=${currentPage}`).then(res => {
-
-      dispatch(addCharacters([...characters, ...res.data.results]))
-
-      setIsLoading(false)
-    }).catch((err) => {
-      Alert.alert('Erro inesperado', 'Não foi possível buscar os dados')
-    });
-  }
+    dispatch(setLoading(true))
+    dispatch(getAllCharacters())
+  }, [])
 
   const handleEvent = useCallback((item: ICharacter) => {
-    setCharacter(item)
+    dispatch(setCharacter(item))
     setModal(true)
   }, [])
 
   const handlePaginate = useCallback(() => {
-    if (!isLoading && !filtering) {
-      setCurrentPage(currentPage + 1)
-    }
-  }, [currentPage, isLoading, filtering])
+    if(currentPage <= totalPage)
+    dispatch(getAllCharacters())
+  }, [totalPage, currentPage])
+
+  const listEmpty = () => {
+    return !isLoading && characters.length <= 0 ?
+         <Title style={{ fontSize: 16 }}>No results found</Title> : null
+  }
+
+  const listFooter = () => {
+    return isLoading ? <ActivityIndicator size="large" color={theme.colors.primary} /> : null
+  }
 
   return (
     <Container>
@@ -71,30 +67,15 @@ function Home() {
         keyExtractor={(item: ICharacter) => item.id.toString()}
         showsVerticalScrollIndicator={false}
         onEndReached={handlePaginate}
-        ListEmptyComponent={
-          () => (
-            <>
-              {(!isLoading && characters.length <= 0)
-                ? (<Title style={{ fontSize: 16 }}>No results found</Title>)
-                : null
-              }
-            </>
-          )
-        }
-        ListFooterComponent={
-          () => (
-            <>
-              {isLoading ? (<ActivityIndicator size="large" color={theme.colors.primary} />) : null}
-            </>
-          )
-        }
+        ListEmptyComponent={listEmpty}
+        ListFooterComponent={listFooter}
         renderItem={({ item }) => (
           <Character onPress={() => handleEvent(item)} data={item} />
         )}
       />
 
       <Modal show={modal} close={() => setModal(false)}>
-        <DetailCharacter character={character} />
+        <DetailCharacter />
       </Modal>
 
     </Container >

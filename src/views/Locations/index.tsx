@@ -41,6 +41,11 @@ function Locations()  {
     }
   },[])
 
+
+  const listFooter = () => {
+    return isLoading ? <ActivityIndicator size="large" color={theme.colors.primary} /> : null
+  }
+
   return (
     <Container>
 
@@ -50,13 +55,7 @@ function Locations()  {
         keyExtractor={item => item.id.toString()}
         showsVerticalScrollIndicator={false}
         onEndReached={handlePaginate}
-        ListFooterComponent={
-          () => (
-            <>
-              {isLoading ? (<ActivityIndicator size="large" color={theme.colors.primary} />) : null}
-            </>
-          )
-        }
+        ListFooterComponent={listFooter}
         renderItem={({ item }) => (
           <Location>
               <Title style={{fontSize: 14, width: 80 }}>{item.type}</Title>

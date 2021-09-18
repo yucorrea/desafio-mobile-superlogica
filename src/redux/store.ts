@@ -5,8 +5,17 @@ import {
   applyMiddleware,
 } from "@reduxjs/toolkit";
 
+import { all } from "redux-saga/effects";
 import { persistStore, persistReducer} from "redux-persist";
+import createSagaMiddleware from "redux-saga";
 import AsyncStorage from '@react-native-async-storage/async-storage';
+
+import characterReducer from './reducers/character';
+import favoriteReducer from './reducers/favorite';
+import selectedCharacterReducer from './reducers/selectedCharacter';
+
+import characterSaga from "../redux/sagas/character";
+import favoriteSaga from "../redux/sagas/favorite";
 
 const persistConfig = {
   key: 'root',
@@ -14,22 +23,16 @@ const persistConfig = {
   whitelist: ['favorites']
 };
 
-import { all } from "redux-saga/effects";
-
-import createSagaMiddleware from "redux-saga";
-
-import characterReducer from './reducers/character';
-import favoriteReducer from './reducers/favorite';
-
 /* Reducers */ 
 const reducers = combineReducers({
   character: characterReducer,
   favorite:  persistReducer(persistConfig, favoriteReducer),
+  selectedCharacter: selectedCharacterReducer,
 });
 
 /* Sagas */ 
 export const rootSagas = function* rootSagas(): any {
-  return yield all([ ]);
+  return yield all([ characterSaga(), favoriteSaga()]);
 };
 
 /* Store and middlewares configuration */ 
