@@ -1,5 +1,5 @@
 <h1 align="center">
-    <img alt="qrcode" src="./gihub/banner.png" />
+    <img alt="qrcode" src="./github/banner.png" />
 </h1>
 
 <p align="center">
